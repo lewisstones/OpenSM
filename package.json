@@ -1,0 +1,21 @@
+{
+  "name": "open_ss",
+  "version": "1.0.0",
+  "description": "Open-source social services api.",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js",
+    "dev": "tsc -w & nodemon dist/index.js"
+  },
+  "author": "Lewis Stones",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.17.16",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
