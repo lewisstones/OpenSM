@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createPost = exports.getPost = void 0;
-const staticTypes_1 = require("../db/staticTypes");
+const staticTypes_1 = require("../db/types/staticTypes");
 const postValidators_1 = require("../validators/postValidators");
 const postServices_1 = require("../services/postServices");
 /**
@@ -11,7 +11,7 @@ const postServices_1 = require("../services/postServices");
  * @returns
  */
 const getPost = (req, res) => {
-    const validatedData = postValidators_1.getPostSchema.validate(req.body);
+    const validatedData = postValidators_1.getPostSchema.validate(req.query);
     if (validatedData.error) {
         throw validatedData.error;
     }
@@ -33,7 +33,7 @@ const createPost = (req, res) => {
     }
     else {
         (0, postServices_1.addPostToDb)(validatedData.value);
+        return staticTypes_1.staticPost;
     }
-    return staticTypes_1.staticPost;
 };
 exports.createPost = createPost;

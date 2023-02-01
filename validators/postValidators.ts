@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { createPostType } from "../db/postTypes";
+import { createPostType } from "../db/types/postTypes";
 
 /**
  * @description Joi schema for validating the getPost request params

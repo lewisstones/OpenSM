@@ -1,7 +1,6 @@
 // const { blogpostDb } = require('../db')
-import { createPostType, basePost } from "../db/postTypes";
-import { createPostSchema } from "../validators/postValidators";
-import { staticPost } from "../db/staticTypes";
+import { createPostType, basePost } from "../db/types/postTypes";
+import { staticPost } from "../db/types/staticTypes";
 
 /**
  * @description Add a post to the database
