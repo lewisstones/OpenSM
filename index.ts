@@ -7,6 +7,8 @@ const app: express.Application = express();
 const port = 3000;
 // api name
 const apiName = "OpenSM";
+// for request body parsing
+app.use(express.json());
 // routes
 app.use("/", postRoutes);
 

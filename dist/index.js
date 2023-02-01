@@ -11,6 +11,8 @@ const app = (0, express_1.default)();
 const port = 3000;
 // api name
 const apiName = "OpenSM";
+// for request body parsing
+app.use(express_1.default.json());
 // routes
 app.use("/", postRoutes_1.postRoutes);
 app.listen(port, () => {
