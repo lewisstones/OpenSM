@@ -2,6 +2,7 @@ import express from "express";
 import { postRoutes } from "./routes/postRoutes";
 import { pollRoutes } from "./routes/pollRoutes";
 import { commentRoutes } from "./routes/commentRoutes";
+import { profileRoutes } from "./routes/profileRoutes";
 
 // initialise express application
 const app: express.Application = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/post/", postRoutes);
 app.use("/poll/", pollRoutes);
 app.use("/comment/", commentRoutes);
+app.use("/profile/", profileRoutes);
 
 app.listen(port, () => {
   console.log(`${apiName} listening on port ${port}`);

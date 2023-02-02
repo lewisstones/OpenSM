@@ -13,5 +13,6 @@ export const idCommentSchema = Joi.object({
  */
 export const createCommentSchema = Joi.object<createComment>({
   author: Joi.number().min(1).required(),
+  postId: Joi.number().min(1).required(),
   textContent: Joi.string().min(1).max(1000).required(),
 });

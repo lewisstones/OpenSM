@@ -10,26 +10,6 @@ export const staticProfile: baseProfile = {
   biography: "This is my biography.",
 };
 
-export const staticPost: basePost = {
-  author: staticProfile,
-  textContent:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
-  image: "",
-  timeStamp: "2m",
-  liked: false,
-  commented: false,
-};
-
-export const staticPostLiked: basePost = {
-  author: staticProfile,
-  textContent:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
-  image: "",
-  timeStamp: "2m",
-  liked: true,
-  commented: false,
-};
-
 export const staticPollOption: basePollOption = {
   title: "Option 1",
   description: "This is option 1",
@@ -48,4 +28,26 @@ export const staticComment: baseComment = {
   author: staticProfile,
   textContent: "This is a comment",
   timeStamp: "12:00:00",
+};
+
+export const staticPost: basePost = {
+  author: staticProfile,
+  textContent:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
+  image: "",
+  timeStamp: "2m",
+  liked: false,
+  commented: false,
+  comments: [staticComment, staticComment],
+};
+
+export const staticPostLiked: basePost = {
+  author: staticProfile,
+  textContent:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
+  image: "",
+  timeStamp: "2m",
+  liked: true,
+  commented: false,
+  comments: [staticComment, staticComment],
 };

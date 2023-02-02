@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const postRoutes_1 = require("./routes/postRoutes");
 const pollRoutes_1 = require("./routes/pollRoutes");
 const commentRoutes_1 = require("./routes/commentRoutes");
+const profileRoutes_1 = require("./routes/profileRoutes");
 // initialise express application
 const app = (0, express_1.default)();
 // define the port
@@ -19,6 +20,7 @@ app.use(express_1.default.json());
 app.use("/post/", postRoutes_1.postRoutes);
 app.use("/poll/", pollRoutes_1.pollRoutes);
 app.use("/comment/", commentRoutes_1.commentRoutes);
+app.use("/profile/", profileRoutes_1.profileRoutes);
 app.listen(port, () => {
     console.log(`${apiName} listening on port ${port}`);
 });

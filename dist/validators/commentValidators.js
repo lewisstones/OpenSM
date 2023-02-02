@@ -16,5 +16,6 @@ exports.idCommentSchema = joi_1.default.object({
  */
 exports.createCommentSchema = joi_1.default.object({
     author: joi_1.default.number().min(1).required(),
+    postId: joi_1.default.number().min(1).required(),
     textContent: joi_1.default.string().min(1).max(1000).required(),
 });
