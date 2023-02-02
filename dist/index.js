@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const postRoutes_1 = require("./routes/postRoutes");
 const pollRoutes_1 = require("./routes/pollRoutes");
+const commentRoutes_1 = require("./routes/commentRoutes");
 // initialise express application
 const app = (0, express_1.default)();
 // define the port
@@ -17,6 +18,7 @@ app.use(express_1.default.json());
 // routes
 app.use("/post/", postRoutes_1.postRoutes);
 app.use("/poll/", pollRoutes_1.pollRoutes);
+app.use("/comment/", commentRoutes_1.commentRoutes);
 app.listen(port, () => {
     console.log(`${apiName} listening on port ${port}`);
 });

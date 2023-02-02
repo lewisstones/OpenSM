@@ -5,7 +5,7 @@ import { createPostType } from "../db/types/postTypes";
  * @description Joi schema for validating the getPost request params
  * @param id : number - the id of the post to get
  */
-export const getPostSchema = Joi.object({
+export const idPostSchema = Joi.object({
   id: Joi.number().min(1).required(),
 });
 

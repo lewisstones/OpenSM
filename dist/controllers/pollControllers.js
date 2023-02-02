@@ -20,8 +20,7 @@ const createPoll = (req, res) => {
         throw validatedData.error;
     }
     else {
-        (0, pollServices_1.addPollToDb)(validatedData.value);
-        return staticTypes_1.staticPoll;
+        return (0, pollServices_1.addPollToDb)(validatedData.value);
     }
 };
 exports.createPoll = createPoll;

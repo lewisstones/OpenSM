@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createPost = exports.getPost = void 0;
+exports.likePost = exports.createPost = exports.getPost = void 0;
 const staticTypes_1 = require("../db/types/staticTypes");
 const postValidators_1 = require("../validators/postValidators");
 const postServices_1 = require("../services/postServices");
@@ -11,13 +11,11 @@ const postServices_1 = require("../services/postServices");
  * @returns
  */
 const getPost = (req, res) => {
-    const validatedData = postValidators_1.getPostSchema.validate(req.query);
-    if (validatedData.error) {
-        throw validatedData.error;
+    const { error, value: validatedData } = postValidators_1.idPostSchema.validate(req.query);
+    if (error) {
+        throw error;
     }
-    else {
-        return staticTypes_1.staticPost;
-    }
+    return staticTypes_1.staticPost;
 };
 exports.getPost = getPost;
 /**
@@ -27,13 +25,26 @@ exports.getPost = getPost;
  * @returns
  */
 const createPost = (req, res) => {
-    const validatedData = postValidators_1.createPostSchema.validate(req.body);
-    if (validatedData.error) {
-        throw validatedData.error;
+    const { error, value: validatedData } = postValidators_1.createPostSchema.validate(req.body);
+    if (error) {
+        throw error;
     }
     else {
-        (0, postServices_1.addPostToDb)(validatedData.value);
-        return staticTypes_1.staticPost;
+        return (0, postServices_1.addPostToDb)(validatedData);
     }
 };
 exports.createPost = createPost;
+/**
+ * @description Like a post
+ * @param req
+ * @param res
+ * @returns
+ */
+const likePost = (req, res) => {
+    const { error, value: validatedData } = postValidators_1.idPostSchema.validate(req.query);
+    if (error) {
+        throw error;
+    }
+    return staticTypes_1.staticPostLiked;
+};
+exports.likePost = likePost;

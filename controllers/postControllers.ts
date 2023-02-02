@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { basePost } from "../db/types/postTypes";
-import { staticPost } from "../db/types/staticTypes";
-import { createPostSchema, getPostSchema } from "../validators/postValidators";
+import { staticPost, staticPostLiked } from "../db/types/staticTypes";
+import { createPostSchema, idPostSchema } from "../validators/postValidators";
 import { addPostToDb } from "../services/postServices";
 
 /**
@@ -11,12 +11,11 @@ import { addPostToDb } from "../services/postServices";
  * @returns
  */
 export const getPost = (req: Request, res: Response): basePost => {
-  const validatedData = getPostSchema.validate(req.query);
-  if (validatedData.error) {
-    throw validatedData.error;
-  } else {
-    return staticPost;
+  const { error, value: validatedData } = idPostSchema.validate(req.query);
+  if (error) {
+    throw error;
   }
+  return staticPost;
 };
 
 /**
@@ -26,11 +25,24 @@ export const getPost = (req: Request, res: Response): basePost => {
  * @returns
  */
 export const createPost = (req: Request, res: Response): basePost => {
-  const validatedData = createPostSchema.validate(req.body);
-  if (validatedData.error) {
-    throw validatedData.error;
+  const { error, value: validatedData } = createPostSchema.validate(req.body);
+  if (error) {
+    throw error;
   } else {
-    addPostToDb(validatedData.value);
-    return staticPost;
+    return addPostToDb(validatedData);
   }
+};
+
+/**
+ * @description Like a post
+ * @param req
+ * @param res
+ * @returns
+ */
+export const likePost = (req: Request, res: Response): basePost => {
+  const { error, value: validatedData } = idPostSchema.validate(req.query);
+  if (error) {
+    throw error;
+  }
+  return staticPostLiked;
 };

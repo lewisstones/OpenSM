@@ -18,7 +18,6 @@ export const createPoll = (req: Request, res: Response): basePoll => {
   if (validatedData.error) {
     throw validatedData.error;
   } else {
-    addPollToDb(validatedData.value);
-    return staticPoll;
+    return addPollToDb(validatedData.value);
   }
 };
