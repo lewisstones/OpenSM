@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createProfile = exports.getProfile = void 0;
+exports.subscribeToProfile = exports.createProfile = exports.getProfile = void 0;
 const profileValidators_1 = require("../validators/profileValidators");
 const staticTypes_1 = require("../db/types/staticTypes");
 const profileServices_1 = require("../services/profileServices");
@@ -34,3 +34,5 @@ const createProfile = (req, res) => {
     }
 };
 exports.createProfile = createProfile;
+const subscribeToProfile = (req, res) => { };
+exports.subscribeToProfile = subscribeToProfile;

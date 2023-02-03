@@ -37,3 +37,5 @@ export const createProfile = (req: Request, res: Response): baseProfile => {
     return addProfileToDb(validatedData);
   }
 };
+
+export const subscribeToProfile = (req: Request, res: Response) => {};
