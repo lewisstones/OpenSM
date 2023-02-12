@@ -17,3 +17,10 @@ profileRoutes.post("/create", (_req, _res) => {
   const obj = createProfile(_req, _res);
   _res.send(obj);
 });
+
+/**
+ * @description: Edit a profile
+ */
+profileRoutes.post("/edit", (_req, _res) => {
+  _res.send("edit");
+});
