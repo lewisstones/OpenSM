@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subscribeToProfile = exports.createProfile = exports.getProfile = void 0;
+exports.unsubscribeFromProfile = exports.subscribeToProfile = exports.createProfile = exports.getProfile = void 0;
 const profileValidators_1 = require("../validators/profileValidators");
 const staticTypes_1 = require("../db/types/staticTypes");
 const profileServices_1 = require("../services/profileServices");
@@ -34,5 +34,35 @@ const createProfile = (req, res) => {
     }
 };
 exports.createProfile = createProfile;
-const subscribeToProfile = (req, res) => { };
+/**
+ * @description Subscribe to a profile
+ * @param req
+ * @param res
+ * @returns
+ */
+const subscribeToProfile = (req, res) => {
+    const { error, value: validatedData } = profileValidators_1.idProfileSchema.validate(req.body);
+    if (error) {
+        throw error;
+    }
+    else {
+        return true;
+    }
+};
 exports.subscribeToProfile = subscribeToProfile;
+/**
+ * @description Unsubscribe from a profile
+ * @param req
+ * @param res
+ * @returns
+ */
+const unsubscribeFromProfile = (req, res) => {
+    const { error, value: validatedData } = profileValidators_1.idProfileSchema.validate(req.body);
+    if (error) {
+        throw error;
+    }
+    else {
+        return true;
+    }
+};
+exports.unsubscribeFromProfile = unsubscribeFromProfile;

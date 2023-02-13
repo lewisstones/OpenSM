@@ -28,6 +28,14 @@ export const staticComment: baseComment = {
   author: staticProfile,
   textContent: "This is a comment",
   timeStamp: "12:00:00",
+  liked: false,
+};
+
+export const staticCommentLiked: baseComment = {
+  author: staticProfile,
+  textContent: "This is a comment",
+  timeStamp: "12:00:00",
+  liked: true,
 };
 
 export const staticPost: basePost = {

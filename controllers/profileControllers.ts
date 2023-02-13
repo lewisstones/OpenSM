@@ -38,4 +38,32 @@ export const createProfile = (req: Request, res: Response): baseProfile => {
   }
 };
 
-export const subscribeToProfile = (req: Request, res: Response) => {};
+/**
+ * @description Subscribe to a profile
+ * @param req
+ * @param res
+ * @returns
+ */
+export const subscribeToProfile = (req: Request, res: Response) => {
+  const { error, value: validatedData } = idProfileSchema.validate(req.body);
+  if (error) {
+    throw error;
+  } else {
+    return true;
+  }
+};
+
+/**
+ * @description Unsubscribe from a profile
+ * @param req
+ * @param res
+ * @returns
+ */
+export const unsubscribeFromProfile = (req: Request, res: Response) => {
+  const { error, value: validatedData } = idProfileSchema.validate(req.body);
+  if (error) {
+    throw error;
+  } else {
+    return true;
+  }
+};

@@ -11,3 +11,6 @@ exports.commentRoutes.post("/create", (_req, _res) => {
     const obj = (0, commentControllers_1.createComment)(_req, _res);
     _res.send(obj);
 });
+exports.commentRoutes.post("/like", (_req, _res) => {
+    _res.send((0, commentControllers_1.likeComment)(_req, _res));
+});

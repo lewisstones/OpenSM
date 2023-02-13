@@ -17,3 +17,9 @@ exports.profileRoutes.post("/create", (_req, _res) => {
     const obj = (0, profileControllers_1.createProfile)(_req, _res);
     _res.send(obj);
 });
+/**
+ * @description: Edit a profile
+ */
+exports.profileRoutes.post("/edit", (_req, _res) => {
+    _res.send("edit");
+});

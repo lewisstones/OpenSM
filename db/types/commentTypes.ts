@@ -7,6 +7,7 @@ export interface baseComment {
   author: baseProfile;
   textContent: string;
   timeStamp: string;
+  liked?: boolean;
 }
 
 /**

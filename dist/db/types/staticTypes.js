@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.staticPostLiked = exports.staticPost = exports.staticComment = exports.staticPoll = exports.staticPollOption = exports.staticProfile = void 0;
+exports.staticPostLiked = exports.staticPost = exports.staticCommentLiked = exports.staticComment = exports.staticPoll = exports.staticPollOption = exports.staticProfile = void 0;
 exports.staticProfile = {
     handle: "lewis",
     name: "Lewis Stones",
@@ -23,6 +23,13 @@ exports.staticComment = {
     author: exports.staticProfile,
     textContent: "This is a comment",
     timeStamp: "12:00:00",
+    liked: false,
+};
+exports.staticCommentLiked = {
+    author: exports.staticProfile,
+    textContent: "This is a comment",
+    timeStamp: "12:00:00",
+    liked: true,
 };
 exports.staticPost = {
     author: exports.staticProfile,
