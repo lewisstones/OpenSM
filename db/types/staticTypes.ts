@@ -1,7 +1,15 @@
+import { baseUser } from "./userTypes";
 import { basePost } from "./postTypes";
 import { baseProfile } from "./profileType";
 import { basePoll, basePollOption } from "./pollTypes";
 import { baseComment } from "./commentTypes";
+
+export const staticUser: baseUser = {
+  first_name: "Lewis",
+  last_name: "Stones",
+  email: "lewis@gmail.com",
+  is_admin: true,
+};
 
 export const staticProfile: baseProfile = {
   handle: "lewis",
