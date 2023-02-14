@@ -4,6 +4,7 @@ import { pollRoutes } from "./routes/pollRoutes";
 import { commentRoutes } from "./routes/commentRoutes";
 import { profileRoutes } from "./routes/profileRoutes";
 import { feedRoutes } from "./routes/feedRoutes";
+import { userRoutes } from "./routes/userRoutes";
 
 // initialise express application
 const app: express.Application = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/post/", postRoutes);
 app.use("/poll/", pollRoutes);
 app.use("/comment/", commentRoutes);
+app.use("/user/", userRoutes);
 app.use("/profile/", profileRoutes);
 app.use("/feed/", feedRoutes);
 

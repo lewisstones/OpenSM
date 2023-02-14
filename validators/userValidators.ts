@@ -12,7 +12,7 @@ export const idUserSchema = Joi.object({
  * @description Validate the params for create user endpoint
  */
 export const createUserSchema = Joi.object<createUser>({
-  handle: Joi.string().min(3).max(30).required(),
+  first_name: Joi.string().required(),
+  last_name: Joi.string().required(),
   email: Joi.string().email().required(),
-  is_admin: Joi.boolean().required().default(false),
 });

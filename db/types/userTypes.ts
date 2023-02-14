@@ -5,7 +5,14 @@ export interface baseUser {
   first_name: string;
   last_name: string;
   email: string;
-  is_admin: boolean;
+}
+
+/**
+ * @description User type, used for returning user data
+ */
+export interface safeUser {
+  id: number;
+  first_name: string;
 }
 
 /**
@@ -15,5 +22,4 @@ export interface createUser {
   first_name: string;
   last_name: string;
   email: string;
-  is_admin: boolean;
 }

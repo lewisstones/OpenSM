@@ -1,7 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.staticPostLiked = exports.staticPost = exports.staticCommentLiked = exports.staticComment = exports.staticPoll = exports.staticPollOption = exports.staticProfile = void 0;
+exports.staticPostLiked = exports.staticPost = exports.staticCommentLiked = exports.staticComment = exports.staticPoll = exports.staticPollOption = exports.staticProfile = exports.staticSafeUser = exports.staticUser = void 0;
+exports.staticUser = {
+    first_name: "Lewis",
+    last_name: "Stones",
+    email: "lewis@gmail.com",
+};
+exports.staticSafeUser = {
+    id: 1,
+    first_name: "John",
+};
 exports.staticProfile = {
+    user: exports.staticSafeUser,
     handle: "lewis",
     name: "Lewis Stones",
     activity: "Daily",

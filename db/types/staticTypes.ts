@@ -1,4 +1,4 @@
-import { baseUser } from "./userTypes";
+import { baseUser, safeUser } from "./userTypes";
 import { basePost } from "./postTypes";
 import { baseProfile } from "./profileType";
 import { basePoll, basePollOption } from "./pollTypes";
@@ -8,10 +8,15 @@ export const staticUser: baseUser = {
   first_name: "Lewis",
   last_name: "Stones",
   email: "lewis@gmail.com",
-  is_admin: true,
+};
+
+export const staticSafeUser: safeUser = {
+  id: 1,
+  first_name: "John",
 };
 
 export const staticProfile: baseProfile = {
+  user: staticSafeUser,
   handle: "lewis",
   name: "Lewis Stones",
   activity: "Daily",
