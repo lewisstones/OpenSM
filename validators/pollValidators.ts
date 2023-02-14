@@ -14,7 +14,6 @@ export const getPollSchema = Joi.object({
 export const createPollOptionSchema = Joi.object<basePollOption>({
   title: Joi.string().min(1).max(1000).required(),
   description: Joi.string().min(1).max(1000).required(),
-  votes: Joi.number().min(0).required(),
 });
 
 /**
@@ -26,4 +25,11 @@ export const createPollSchema = Joi.object<createPoll>({
   description: Joi.string().min(1).max(1000).required(),
   disclaimer: Joi.string().min(1).max(1000).required(),
   options: Joi.array().items(createPollOptionSchema).min(2).required(),
+});
+
+/**
+ * @description Schema for validating the request body for vote on poll
+ */
+export const voteOnPollSchema = Joi.object({
+  id: Joi.number().min(1).required(),
 });

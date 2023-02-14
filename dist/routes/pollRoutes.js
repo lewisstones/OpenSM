@@ -17,3 +17,15 @@ exports.pollRoutes.post("/create", (_req, _res) => {
     const obj = (0, pollControllers_1.createPoll)(_req, _res);
     _res.send(obj);
 });
+/**
+ * @description: Vote on a poll
+ */
+exports.pollRoutes.post("/vote", (_req, _res) => {
+    _res.send((0, pollControllers_1.voteOnPoll)(_req, _res));
+});
+/**
+ * @description: Create a new poll option
+ */
+exports.pollRoutes.post("/option/create", (_req, _res) => {
+    _res.send((0, pollControllers_1.createPollOption)(_req, _res));
+});

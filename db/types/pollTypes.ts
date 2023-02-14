@@ -6,7 +6,7 @@ import { baseProfile } from "./profileType";
 export interface basePollOption {
   title: string;
   description: string;
-  votes: number;
+  votes?: number;
 }
 
 /**
