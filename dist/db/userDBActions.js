@@ -13,35 +13,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUserDBAction = exports.getUserDBAction = void 0;
-const uuid_1 = __importDefault(require("uuid"));
-const userDynamo_1 = __importDefault(require("./userDynamo"));
+const uuid_1 = require("uuid");
+const dynamo_1 = __importDefault(require("./dynamo"));
 /**
  * @description Get a user from the database
  * @param event
  * @returns
  */
-const getUserDBAction = (event) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const id = (_a = event.pathParameters) === null || _a === void 0 ? void 0 : _a.id;
+const getUserDBAction = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield userDynamo_1.default
+        const result = yield dynamo_1.default
             .get({
-            TableName: "Users",
+            TableName: "UserTable",
             Key: {
                 id: id,
             },
         })
             .promise();
-        return {
-            statusCode: 200,
-            body: JSON.stringify(result.Item),
-        };
+        return result.Item;
     }
     catch (dbError) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify(dbError),
-        };
+        return dbError;
     }
 });
 exports.getUserDBAction = getUserDBAction;
@@ -50,31 +42,25 @@ exports.getUserDBAction = getUserDBAction;
  * @param event
  * @returns
  */
-const createUserDBAction = (event) => __awaiter(void 0, void 0, void 0, function* () {
-    const { first_name, last_name, email } = JSON.parse(event.body);
+const createUserDBAction = (body) => __awaiter(void 0, void 0, void 0, function* () {
+    const { first_name, last_name, email } = body;
     const params = {
-        id: uuid_1.default.v4(),
+        id: (0, uuid_1.v4)(),
         first_name,
         last_name,
         email,
     };
     try {
-        yield userDynamo_1.default
+        yield dynamo_1.default
             .put({
-            TableName: "Users",
+            TableName: "UserTable",
             Item: params,
         })
             .promise();
-        return {
-            statusCode: 200,
-            body: JSON.stringify(params),
-        };
+        return params;
     }
     catch (dbError) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify(dbError),
-        };
+        throw dbError;
     }
 });
 exports.createUserDBAction = createUserDBAction;

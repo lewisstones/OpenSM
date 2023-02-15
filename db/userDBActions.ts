@@ -1,34 +1,25 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import uuid from "uuid";
-import useDynamo from "./userDynamo";
+import { v4 } from "uuid";
+import dynamo from "./dynamo";
+import { baseUser, createUser } from "../db/types/userTypes";
 
 /**
  * @description Get a user from the database
  * @param event
  * @returns
  */
-export const getUserDBAction = async (
-  event: APIGatewayProxyEvent
-): Promise<APIGatewayProxyResult> => {
-  const id = event.pathParameters?.id;
+export const getUserDBAction = async (id: string) => {
   try {
-    const result = await useDynamo
+    const result = await dynamo
       .get({
-        TableName: "Users",
+        TableName: "UserTable",
         Key: {
           id: id,
         },
       })
       .promise();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(result.Item),
-    };
+    return result.Item;
   } catch (dbError) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify(dbError),
-    };
+    return dbError;
   }
 };
 
@@ -38,33 +29,27 @@ export const getUserDBAction = async (
  * @returns
  */
 export const createUserDBAction = async (
-  event: APIGatewayProxyEvent
-): Promise<APIGatewayProxyResult> => {
-  const { first_name, last_name, email } = JSON.parse(event.body as string);
+  body: createUser
+): Promise<baseUser> => {
+  const { first_name, last_name, email } = body;
 
   const params = {
-    id: uuid.v4(),
+    id: v4(),
     first_name,
     last_name,
     email,
   };
 
   try {
-    await useDynamo
+    await dynamo
       .put({
-        TableName: "Users",
+        TableName: "UserTable",
         Item: params,
       })
       .promise();
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify(params),
-    };
+    return params;
   } catch (dbError) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify(dbError),
-    };
+    throw dbError;
   }
 };

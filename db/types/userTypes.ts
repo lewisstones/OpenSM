@@ -23,3 +23,8 @@ export interface createUser {
   last_name: string;
   email: string;
 }
+
+export interface userResponse {
+  body: baseUser;
+  statusCode: number;
+}
