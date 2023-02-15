@@ -1,9 +1,42 @@
-import AWS from "aws-sdk";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import uuid from "uuid";
+import useDynamo from "./userDynamo";
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+/**
+ * @description Get a user from the database
+ * @param event
+ * @returns
+ */
+export const getUserDBAction = async (
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> => {
+  const id = event.pathParameters?.id;
+  try {
+    const result = await useDynamo
+      .get({
+        TableName: "Users",
+        Key: {
+          id: id,
+        },
+      })
+      .promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(result.Item),
+    };
+  } catch (dbError) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify(dbError),
+    };
+  }
+};
 
+/**
+ * @description Create a new user in the database
+ * @param event
+ * @returns
+ */
 export const createUserDBAction = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
@@ -17,7 +50,7 @@ export const createUserDBAction = async (
   };
 
   try {
-    await dynamodb
+    await useDynamo
       .put({
         TableName: "Users",
         Item: params,
