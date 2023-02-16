@@ -13,7 +13,6 @@ useDotenv: true
 
 plugins:
   - serverless-plugin-typescript
-  - serverless-dynamodb-local
   - serverless-offline
   - serverless-apigw-binary
 
@@ -147,17 +146,3 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-
-# for running dynamoDB locally
-custom:
-  dynamodb:
-    stages:
-      - dev
-    start:
-      port: 8000
-      inMemory: true
-      heapInitial: 200m
-      heapMax: 1g
-      migrate: true
-      seed: true
-      convertEmptyValues: true
