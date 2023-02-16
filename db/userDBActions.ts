@@ -8,7 +8,7 @@ import { baseUser, createUser } from "../db/types/userTypes";
  * @param event
  * @returns
  */
-export const getUserDBAction = async (id: string) => {
+export const getUserDBAction = async (id: string): Promise<baseUser> => {
   try {
     const command = new GetCommand({
       TableName: "UserTable",
@@ -17,9 +17,9 @@ export const getUserDBAction = async (id: string) => {
       },
     });
     const result = await dynamo.send(command);
-    return result.Item;
+    return result.Item as baseUser;
   } catch (dbError) {
-    return dbError;
+    throw dbError;
   }
 };
 

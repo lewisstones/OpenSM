@@ -9,11 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addUserToDb = exports.createUserService = exports.getUserService = void 0;
-const staticTypes_1 = require("../db/types/staticTypes");
+exports.createUserService = exports.getUserService = void 0;
 const userDBActions_1 = require("../db/userDBActions");
 /**
- * @description Get a user from the database
+ * @description Service: Get a user from the database
  * @param id
  * @returns
  */
@@ -24,6 +23,11 @@ const getUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return yield (0, userDBActions_1.getUserDBAction)(id);
 });
 exports.getUserService = getUserService;
+/**
+ * @description Service: Create a new user in the database
+ * @param body
+ * @returns
+ */
 const createUserService = (body) => __awaiter(void 0, void 0, void 0, function* () {
     // -- business logic here --
     // - permissions
@@ -31,12 +35,3 @@ const createUserService = (body) => __awaiter(void 0, void 0, void 0, function* 
     return yield (0, userDBActions_1.createUserDBAction)(body);
 });
 exports.createUserService = createUserService;
-/**
- * @description Add a user to the database
- * @param post
- * @returns
- */
-const addUserToDb = (post) => {
-    return staticTypes_1.staticUser;
-};
-exports.addUserToDb = addUserToDb;

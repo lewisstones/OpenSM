@@ -30,7 +30,7 @@ const getUserDBAction = (id) => __awaiter(void 0, void 0, void 0, function* () {
         return result.Item;
     }
     catch (dbError) {
-        return dbError;
+        throw dbError;
     }
 });
 exports.getUserDBAction = getUserDBAction;
