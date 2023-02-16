@@ -21,10 +21,13 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.272.0",
+    "@aws-sdk/lib-dynamodb": "^3.272.0",
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1315.0",
     "express": "^4.18.2",
     "joi": "^17.7.0",
+    "serverless-dynamodb-local": "^0.2.40",
     "uuid": "^9.0.0"
   }
 }

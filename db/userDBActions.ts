@@ -1,5 +1,6 @@
 import { v4 } from "uuid";
-import dynamo from "./dynamo";
+import { dynamo } from "./dynamo";
+import { PutCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 import { baseUser, createUser } from "../db/types/userTypes";
 
 /**
@@ -9,14 +10,13 @@ import { baseUser, createUser } from "../db/types/userTypes";
  */
 export const getUserDBAction = async (id: string) => {
   try {
-    const result = await dynamo
-      .get({
-        TableName: "UserTable",
-        Key: {
-          id: id,
-        },
-      })
-      .promise();
+    const command = new GetCommand({
+      TableName: "UserTable",
+      Key: {
+        id: id,
+      },
+    });
+    const result = await dynamo.send(command);
     return result.Item;
   } catch (dbError) {
     return dbError;
@@ -28,9 +28,7 @@ export const getUserDBAction = async (id: string) => {
  * @param event
  * @returns
  */
-export const createUserDBAction = async (
-  body: createUser
-): Promise<baseUser> => {
+export const createUserDBAction = async (body: createUser): Promise<baseUser> => {
   const { first_name, last_name, email } = body;
 
   const params = {
@@ -40,14 +38,13 @@ export const createUserDBAction = async (
     email,
   };
 
-  try {
-    await dynamo
-      .put({
-        TableName: "UserTable",
-        Item: params,
-      })
-      .promise();
+  const command = new PutCommand({
+    TableName: "UserTable",
+    Item: params,
+  });
 
+  try {
+    await dynamo.send(command);
     return params;
   } catch (dbError) {
     throw dbError;

@@ -7,16 +7,14 @@ import { getUserDBAction, createUserDBAction } from "../db/userDBActions";
  * @param id
  * @returns
  */
-export const getUserService = (id: string) => {
+export const getUserService = async (id: string) => {
   // -- business logic here --
   // - permissions
   // - blocked / banned / suspended
-  return getUserDBAction(id);
+  return await getUserDBAction(id);
 };
 
-export const createUserService = async (
-  body: createUser
-): Promise<baseUser> => {
+export const createUserService = async (body: createUser): Promise<baseUser> => {
   // -- business logic here --
   // - permissions
   // - blocked / banned / suspended

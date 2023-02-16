@@ -1,15 +1,13 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.dynamo = void 0;
 /**
  * @fileoverview DynamoDB client for user and profile tables
  */
-const aws_sdk_1 = __importDefault(require("aws-sdk"));
-aws_sdk_1.default.config.update({
-    region: process.env.AWS_REGION,
-    //endpoint: process.env.DYNAMODB_ENDPOINT,
-});
-const dynamo = new aws_sdk_1.default.DynamoDB.DocumentClient();
-exports.default = dynamo;
+const client_dynamodb_1 = require("@aws-sdk/client-dynamodb");
+const lib_dynamodb_1 = require("@aws-sdk/lib-dynamodb");
+const dynamo = lib_dynamodb_1.DynamoDBDocumentClient.from(new client_dynamodb_1.DynamoDBClient({
+    region: "localhost",
+    endpoint: "http://localhost:8000",
+}));
+exports.dynamo = dynamo;

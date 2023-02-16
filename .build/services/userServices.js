@@ -17,12 +17,12 @@ const userDBActions_1 = require("../db/userDBActions");
  * @param id
  * @returns
  */
-const getUserService = (id) => {
+const getUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     // -- business logic here --
     // - permissions
     // - blocked / banned / suspended
-    return (0, userDBActions_1.getUserDBAction)(id);
-};
+    return yield (0, userDBActions_1.getUserDBAction)(id);
+});
 exports.getUserService = getUserService;
 const createUserService = (body) => __awaiter(void 0, void 0, void 0, function* () {
     // -- business logic here --

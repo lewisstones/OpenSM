@@ -13,6 +13,7 @@ useDotenv: true
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-dynamodb-local
   - serverless-offline
   - serverless-apigw-binary
 
@@ -21,7 +22,7 @@ provider:
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   stage: dev
-  region: eu-west-1
+  region: eu-west-2
 
   # you can add statements to the Lambda function's IAM Role here
   #  iamRoleStatements:
@@ -45,15 +46,18 @@ provider:
         - Effect: Allow
           Action:
             - "dynamodb:PutItem"
+            - "dynamodb:PostItem"
             - "dynamodb:GetItem"
             - "dynamodb:DeleteItem"
             - "dynamodb:Scan"
           Resource:
             - { "Fn::GetAtt": ["UserTable", "Arn"] }
 
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+  # you can define service wide environment variables here
+  environment:
+    AWS_ACCESS_KEY_ID: ${process.env.AWS_ACCESS_KEY_ID}
+    AWS_SECRET_ACCESS_KEY: ${process.env.AWS_SECRET_ACCESS_KEY}
+    AWS_REGION: ${process.env.AWS_REGION}
 
 # you can add packaging information here
 #package:
@@ -76,19 +80,6 @@ functions:
       - httpApi:
           path: /user
           method: post
-
-  #updateProduct:
-  #  handler: src/handlers.updateProduct
-  #  events:
-  #    - httpApi:
-  #        path: /product/{id}
-  #        method: put
-  #deleteProduct:
-  #  handler: src/handlers.deleteProduct
-  #  events:
-  #    - httpApi:
-  #        path: /product/{id}
-  #        method: delete
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -156,3 +147,17 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+
+# for running dynamoDB locally
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+      seed: true
+      convertEmptyValues: true

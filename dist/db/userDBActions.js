@@ -8,13 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUserDBAction = exports.getUserDBAction = void 0;
 const uuid_1 = require("uuid");
-const dynamo_1 = __importDefault(require("./dynamo"));
+const dynamo_1 = require("./dynamo");
+const lib_dynamodb_1 = require("@aws-sdk/lib-dynamodb");
 /**
  * @description Get a user from the database
  * @param event
@@ -22,14 +20,13 @@ const dynamo_1 = __importDefault(require("./dynamo"));
  */
 const getUserDBAction = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield dynamo_1.default
-            .get({
+        const command = new lib_dynamodb_1.GetCommand({
             TableName: "UserTable",
             Key: {
                 id: id,
             },
-        })
-            .promise();
+        });
+        const result = yield dynamo_1.dynamo.send(command);
         return result.Item;
     }
     catch (dbError) {
@@ -50,13 +47,12 @@ const createUserDBAction = (body) => __awaiter(void 0, void 0, void 0, function*
         last_name,
         email,
     };
+    const command = new lib_dynamodb_1.PutCommand({
+        TableName: "UserTable",
+        Item: params,
+    });
     try {
-        yield dynamo_1.default
-            .put({
-            TableName: "UserTable",
-            Item: params,
-        })
-            .promise();
+        yield dynamo_1.dynamo.send(command);
         return params;
     }
     catch (dbError) {

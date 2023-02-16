@@ -26,7 +26,7 @@ const getUserServerless = (event) => __awaiter(void 0, void 0, void 0, function*
     }
     else {
         // Call the service
-        const user = (0, userServices_1.getUserService)(validatedData.id);
+        const user = yield (0, userServices_1.getUserService)(validatedData.id);
         if (!user) {
             return {
                 statusCode: 404,

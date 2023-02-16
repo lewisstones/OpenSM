@@ -1,13 +1,14 @@
 /**
  * @fileoverview DynamoDB client for user and profile tables
  */
-import AWS from "aws-sdk";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-AWS.config.update({
-  region: process.env.AWS_REGION,
-  //endpoint: process.env.DYNAMODB_ENDPOINT,
-});
+const dynamo = DynamoDBDocumentClient.from(
+  new DynamoDBClient({
+    region: "localhost",
+    endpoint: "http://localhost:8000",
+  })
+);
 
-const dynamo = new AWS.DynamoDB.DocumentClient();
-
-export default dynamo;
+export { dynamo };

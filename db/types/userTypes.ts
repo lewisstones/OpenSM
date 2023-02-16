@@ -11,7 +11,7 @@ export interface baseUser {
  * @description User type, used for returning user data
  */
 export interface safeUser {
-  id: number;
+  id: string;
   first_name: string;
 }
 

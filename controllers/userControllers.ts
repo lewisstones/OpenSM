@@ -18,7 +18,7 @@ export const getUserServerless = async (event: APIGatewayProxyEvent): Promise<AP
     throw error;
   } else {
     // Call the service
-    const user = getUserService(validatedData.id);
+    const user = await getUserService(validatedData.id);
     if (!user) {
       return {
         statusCode: 404,

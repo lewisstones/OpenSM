@@ -9,7 +9,7 @@ const joi_1 = __importDefault(require("joi"));
  * @description Validate the params for get user by id
  */
 exports.idUserSchema = joi_1.default.object({
-    id: joi_1.default.number().min(1).required(),
+    id: joi_1.default.string().required(),
 });
 /**
  * @description Validate the params for create user endpoint
