@@ -13,6 +13,7 @@ useDotenv: true
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-dynamodb-local
   - serverless-offline
   - serverless-apigw-binary
 
@@ -78,6 +79,18 @@ functions:
     events:
       - httpApi:
           path: /user
+          method: post
+  getProfile:
+    handler: controllers/profileControllers.getProfileServerless
+    events:
+      - httpApi:
+          path: /profile/{id}
+          method: get
+  createProfile:
+    handler: controllers/profileControllers.createProfileServerless
+    events:
+      - httpApi:
+          path: /profile
           method: post
 
 #    The following are a few example events you can configure
@@ -146,3 +159,32 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+    ProfileTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ProfileTable
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
+# for running dynamoDB locally
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      sharedDb: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+      seed: true
+      convertEmptyValues: true
+      noStart: true

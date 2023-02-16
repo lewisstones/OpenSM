@@ -1,21 +1,19 @@
-import { safeUser } from "./userTypes";
+import { safeUser, baseUser } from "./userTypes";
 
 /**
  * @description Profile type generic to all profiles
  */
 export interface baseProfile {
-  user: safeUser;
+  user: baseUser;
   handle: string;
-  name: string;
-  activity: string;
-  biography: string;
+  activity?: string;
+  biography?: string;
 }
 
 /**
  * @description Subset of the profile type, used for creation of new profiles
  */
 export interface createProfile {
-  user: number;
+  user: string;
   handle: string;
-  name: string;
 }

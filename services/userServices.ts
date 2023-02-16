@@ -3,7 +3,7 @@ import { getUserDBAction, createUserDBAction } from "../db/userDBActions";
 
 /**
  * @description Service: Get a user from the database
- * @param id
+ * @param id : id of user to retrieve
  * @returns
  */
 export const getUserService = async (id: string): Promise<baseUser> => {

@@ -13,7 +13,7 @@ exports.createUserService = exports.getUserService = void 0;
 const userDBActions_1 = require("../db/userDBActions");
 /**
  * @description Service: Get a user from the database
- * @param id
+ * @param id : id of user to retrieve
  * @returns
  */
 const getUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {

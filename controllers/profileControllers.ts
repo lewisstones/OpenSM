@@ -1,11 +1,48 @@
 import { Request, Response } from "express";
-import {
-  idProfileSchema,
-  createProfileSchema,
-} from "../validators/profileValidators";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { idProfileSchema, createProfileSchema } from "../validators/profileValidators";
 import { staticProfile } from "../db/types/staticTypes";
 import { baseProfile } from "../db/types/profileType";
-import { addProfileToDb } from "../services/profileServices";
+import { addProfileToDb, createProfileService, getProfileService } from "../services/profileServices";
+
+export const getProfileServerless = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  const { error, value: validatedData } = idProfileSchema.validate(event.pathParameters);
+  if (error) {
+    throw error;
+  } else {
+    // call service
+    const profile = await getProfileService(validatedData.id);
+    if (!profile) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ message: "Profile not found" }),
+      };
+    }
+    return {
+      statusCode: 200,
+      body: JSON.stringify(profile),
+    };
+  }
+};
+
+export const createProfileServerless = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  const { error, value: validatedData } = createProfileSchema.validate(JSON.parse(event.body as string));
+  if (error) {
+    throw error;
+  } else {
+    const profile = await createProfileService(validatedData);
+    if (!profile) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: "Profile creation failed" }),
+      };
+    }
+    return {
+      statusCode: 200,
+      body: JSON.stringify(profile),
+    };
+  }
+};
 
 /**
  * @description Get a profile
@@ -28,9 +65,7 @@ export const getProfile = (req: Request, res: Response): baseProfile => {
  * @returns
  */
 export const createProfile = (req: Request, res: Response): baseProfile => {
-  const { error, value: validatedData } = createProfileSchema.validate(
-    req.body
-  );
+  const { error, value: validatedData } = createProfileSchema.validate(req.body);
   if (error) {
     throw error;
   } else {
