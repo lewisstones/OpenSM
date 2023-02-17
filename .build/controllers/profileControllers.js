@@ -13,6 +13,11 @@ exports.unsubscribeFromProfile = exports.subscribeToProfile = exports.createProf
 const profileValidators_1 = require("../validators/profileValidators");
 const staticTypes_1 = require("../db/types/staticTypes");
 const profileServices_1 = require("../services/profileServices");
+/**
+ * @description Get a profile by id
+ * @param event
+ * @returns
+ */
 const getProfileServerless = (event) => __awaiter(void 0, void 0, void 0, function* () {
     const { error, value: validatedData } = profileValidators_1.idProfileSchema.validate(event.pathParameters);
     if (error) {
@@ -34,6 +39,11 @@ const getProfileServerless = (event) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.getProfileServerless = getProfileServerless;
+/**
+ * @description Create a new profile
+ * @param event
+ * @returns
+ */
 const createProfileServerless = (event) => __awaiter(void 0, void 0, void 0, function* () {
     const { error, value: validatedData } = profileValidators_1.createProfileSchema.validate(JSON.parse(event.body));
     if (error) {

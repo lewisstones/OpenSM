@@ -13,6 +13,11 @@ exports.createProfileDBAction = exports.getProfileDBAction = void 0;
 const uuid_1 = require("uuid");
 const dynamo_1 = require("./dynamo");
 const lib_dynamodb_1 = require("@aws-sdk/lib-dynamodb");
+/**
+ * @description Query profile by id
+ * @param id
+ * @returns
+ */
 const getProfileDBAction = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const command = new lib_dynamodb_1.GetCommand({
@@ -29,6 +34,11 @@ const getProfileDBAction = (id) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getProfileDBAction = getProfileDBAction;
+/**
+ * @description Create a new profile in the db
+ * @param body
+ * @returns
+ */
 const createProfileDBAction = (body) => __awaiter(void 0, void 0, void 0, function* () {
     const { user, handle } = body;
     const params = {

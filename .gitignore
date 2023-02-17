@@ -4,6 +4,9 @@
 # aws : TODO: write a unit test to 
 .aws
 aws
+.dynamodb
+.dynamodb/
+dynamodb/
 
 # Logs
 logs

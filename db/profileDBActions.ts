@@ -1,8 +1,13 @@
 import { v4 } from "uuid";
 import { dynamo } from "./dynamo";
 import { PutCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
-import { baseProfile, createProfile } from "./types/profileType";
+import { baseProfile } from "./types/profileType";
 
+/**
+ * @description Query profile by id
+ * @param id
+ * @returns
+ */
 export const getProfileDBAction = async (id: string): Promise<baseProfile> => {
   try {
     const command = new GetCommand({
@@ -18,6 +23,11 @@ export const getProfileDBAction = async (id: string): Promise<baseProfile> => {
   }
 };
 
+/**
+ * @description Create a new profile in the db
+ * @param body
+ * @returns
+ */
 export const createProfileDBAction = async (body: baseProfile): Promise<baseProfile> => {
   const { user, handle } = body;
 

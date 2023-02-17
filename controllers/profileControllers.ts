@@ -5,6 +5,11 @@ import { staticProfile } from "../db/types/staticTypes";
 import { baseProfile } from "../db/types/profileType";
 import { addProfileToDb, createProfileService, getProfileService } from "../services/profileServices";
 
+/**
+ * @description Get a profile by id
+ * @param event
+ * @returns
+ */
 export const getProfileServerless = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const { error, value: validatedData } = idProfileSchema.validate(event.pathParameters);
   if (error) {
@@ -25,6 +30,11 @@ export const getProfileServerless = async (event: APIGatewayProxyEvent): Promise
   }
 };
 
+/**
+ * @description Create a new profile
+ * @param event
+ * @returns
+ */
 export const createProfileServerless = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const { error, value: validatedData } = createProfileSchema.validate(JSON.parse(event.body as string));
   if (error) {
