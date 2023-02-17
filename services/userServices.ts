@@ -1,11 +1,26 @@
 import { baseUser, createUser } from "../db/types/userTypes";
-import { staticUser } from "../db/types/staticTypes";
+import { getUserDBAction, createUserDBAction } from "../db/userDBActions";
 
 /**
- * @description Add a user to the database
- * @param post
+ * @description Service: Get a user from the database
+ * @param id : id of user to retrieve
  * @returns
  */
-export const addUserToDb = (post: createUser): baseUser => {
-  return staticUser;
+export const getUserService = async (id: string): Promise<baseUser> => {
+  // -- business logic here --
+  // - permissions
+  // - blocked / banned / suspended
+  return await getUserDBAction(id);
+};
+
+/**
+ * @description Service: Create a new user in the database
+ * @param body
+ * @returns
+ */
+export const createUserService = async (body: createUser): Promise<baseUser> => {
+  // -- business logic here --
+  // - permissions
+  // - blocked / banned / suspended
+  return await createUserDBAction(body);
 };

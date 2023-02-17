@@ -11,13 +11,23 @@
   "author": "Lewis Stones",
   "license": "MIT",
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.110",
     "@types/express": "^4.17.16",
+    "@types/uuid": "^9.0.0",
     "nodemon": "^2.0.20",
-    "typescript": "^4.9.4"
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-offline": "^12.0.4",
+    "serverless-plugin-typescript": "^2.1.4",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.272.0",
+    "@aws-sdk/lib-dynamodb": "^3.272.0",
+    "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1315.0",
     "express": "^4.18.2",
-    "joi": "^17.7.0"
+    "joi": "^17.7.0",
+    "serverless-dynamodb-local": "^0.2.40",
+    "uuid": "^9.0.0"
   }
 }

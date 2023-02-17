@@ -5,7 +5,7 @@ import { createUser } from "../db/types/userTypes";
  * @description Validate the params for get user by id
  */
 export const idUserSchema = Joi.object({
-  id: Joi.number().min(1).required(),
+  id: Joi.string().required(),
 });
 
 /**
